@@ -1,0 +1,3 @@
+$(eval $(call addlib,apppong))
+
+APPPONG_SRCS-y += $(APPPONG_BASE)/main.c
