@@ -1,0 +1,3 @@
+$(eval $(call addlib,appping))
+
+APPPING_SRCS-y += $(APPPING_BASE)/main.c
