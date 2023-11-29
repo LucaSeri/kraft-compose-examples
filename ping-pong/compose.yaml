@@ -1,0 +1,21 @@
+services:
+  ping:
+    build: ./ping
+    networks:
+     ping-pong-net: # Allocate any IP
+  pong:
+    build: ./pong
+    networks: 
+      ping-pong-net:
+        ipv4_address: 172.200.0.5
+
+networks:
+  ping-pong-net:
+    name: ping-pong
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.200.0.1/24 
+      # equivalent to:
+      # - subnet: 172.200.0.0/24
+      # - gateway: 172.200.0.1
