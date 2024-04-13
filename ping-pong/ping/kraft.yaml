@@ -7,11 +7,15 @@ unikraft:
     - CONFIG_LIBNOLIBC=y
     - CONFIG_LIBUKSCHED=y
     - CONFIG_LIBUKSCHEDCOOP=y
+    - CONFIG_LIBUKNETDEV_EINFO_LIBPARAM=y
+    - CONFIG_LIBPOSIX_FDIO=y
+    - CONFIG_LIBPOSIX_TIME=y
+    - CONFIG_LIBVFSCORE=y
 targets: 
   - qemu/x86_64
 libraries:
   lwip:
-    version: stable
+    version: stable 
     kconfig:
       - CONFIG_LWIP_UKNETDEV=y
       - CONFIG_LWIP_TCP=y
@@ -20,4 +24,3 @@ libraries:
       - CONFIG_LWIP_AUTOIFACE=y
       - CONFIG_LWIP_IPV4=y
       - CONFIG_LWIP_DHCP=y
-      - CONFIG_LWIP_SOCKET_PPOLL=n

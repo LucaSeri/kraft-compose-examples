@@ -17,10 +17,12 @@ int main() {
     int sock;
     char buffer[1024];
     struct sockaddr_in addr;
+    int rc;
 
     // Creating socket file descriptor
     if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         printf("Socket creation failed\n");
+        printf("Error: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
 
@@ -32,8 +34,9 @@ int main() {
 
     // Enable broadcasting
     int broadcastEnable = 1;
-    if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, sizeof(broadcastEnable)) < 0) {
+    if ((rc = setsockopt(sock, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, sizeof(broadcastEnable))) < 0) {
         printf("Setsockopt failed\n");
+        printf("Error: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
 
@@ -51,7 +54,8 @@ int main() {
     while (1) {
         // Send ping to broadcast address
         if (sendto(sock, (const char *)PING_MESSAGE, strlen(PING_MESSAGE), 0, (const struct sockaddr *)&addr, sizeof(addr)) < 0) {
-            printf("Sendto failed\n");
+            printf("Sendto failed\n"); 
+            printf("Error: %s\n", strerror(errno));
             exit(EXIT_FAILURE);
         }
 

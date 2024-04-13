@@ -5,6 +5,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <errno.h> // For errno
 
 #define PORT 8080
 #define PING_MESSAGE "ping"
@@ -48,7 +49,7 @@ int main() {
         sleep(1);
 
         // Send pong back to the sender
-        if (sendto(sock, (const char *)PONG_MESSAGE, strlen(PONG_MESSAGE), 0, (const struct sockaddr *)&cli, sizeof(cli)) < 0) {
+        if (sendto(sock, (const char *)PONG_MESSAGE, strlen(PONG_MESSAGE), 0, (const struct sockaddr *)&cli, len) < 0) {
             printf("Sendto failed\n");
             exit(EXIT_FAILURE);
         }
